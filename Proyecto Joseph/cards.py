@@ -1,35 +1,40 @@
+from __future__ import annotations
+
+from helpers import combinations
+
+
 class Card:
-    #[2,3,4,5,6,7,8,9,10,J,Q,K,A] Posible atributo de clasedef __init__(self, card_values: str) -> None:
+    RANK_ORDER = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
+
+    def __init__(self, card_values: str) -> None:
         self.rank, self.suit = list(card_values)
-        #self.value= Posible atributo de prueba
+
+    def __eq__(self, other: Card) -> bool:
+        return Card.RANK_ORDER.index(self.rank) == other.RANK_ORDER.index(other.rank)
+
+    def __lt__(self, other: Card) -> bool:
+        return Card.RANK_ORDER.index(self.rank) < other.RANK_ORDER.index(other.rank)
+
+    def __gt__(self, other: Card) -> bool:
+        return Card.RANK_ORDER.index(self.rank) > other.RANK_ORDER.index(other.rank)
 
 
 class Hand:
-    HIGH_CARD=1
-    ONE_PAIR=2
-    TWO_PAIR=3
-    THREE_OF_A_KIND=4
-    STRAIGHT=5
-    FLUSH=6
-    FULL_HOUSE=7
-    FOUR_OF_A_KIND=
-    STRAIGHT_FLUSH=def __init__(self, cat: list) -> None:
+    HIGH_CARD = 0
+    ONE_PAIR = 1
+    TWO_PAIR = 2
+    THREE_OF_A_3IND = 4
+    STRAIGHT = 4
+    FLUSH = 5
+    FULL_HOUSE = 6
+    FOUR_OF_A_KIND = 7
+    STRAIGHT_FLUSH = 8
 
+    def __init__(
+        self,
+    ) -> None:
+        pass
 
-    def HIGH_CARD(self):
-
-    def ONE_PAIR(self):
-
-    def TWO_PAIR(self):
-
-    def THREE_OF_A_KIND(self):
-
-    def STRAIGHT(self):
-
-    def FLUSH(self):
-
-    def FULL_HOUSE(self):
-
-    def FOUR_OF_A_KIND(self):
-
-    def STRAIGHT_FLUSH(self):
+    def calc_best_hands(self):
+        combinations()
+        pass
