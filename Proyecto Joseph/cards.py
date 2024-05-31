@@ -36,5 +36,4 @@ class Hand:
         pass
 
     def calc_best_hands(self):
-        combinations()
-        pass
+        return combinations()
