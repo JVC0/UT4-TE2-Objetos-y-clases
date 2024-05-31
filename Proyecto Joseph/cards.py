@@ -1,6 +1,5 @@
 class Card:
-    #[2,3,4,5,6,7,8,9,10,J,Q,K,A] Posible atributo de clase
-    def __init__(self, card_values: str) -> None:
+    #[2,3,4,5,6,7,8,9,10,J,Q,K,A] Posible atributo de clasedef __init__(self, card_values: str) -> None:
         self.rank, self.suit = list(card_values)
         #self.value= Posible atributo de prueba
 
@@ -13,27 +12,24 @@ class Hand:
     STRAIGHT=5
     FLUSH=6
     FULL_HOUSE=7
-    FOUR_OF_A_KIND
-    STRAIGHT_FLUSH
-    def __init__(self, cat: list) -> None:
-        self.cat = ('HIGH_CARD', 'ONE_PAIR', 'TWO_PAIR', 'THREE_OF_A_KIND',
-                    'STRAIGHT', 'FLUSH', 'FULL_HOUSE', 'FOUR_OF_A_KIND',
-                    'STRAIGHT_FLUSH')
+    FOUR_OF_A_KIND=
+    STRAIGHT_FLUSH=def __init__(self, cat: list) -> None:
 
-    # def HIGH_CARD(self):
 
-    # def ONE_PAIR(self):
+    def HIGH_CARD(self):
 
-    # def TWO_PAIR(self):
+    def ONE_PAIR(self):
 
-    # def THREE_OF_A_KIND(self):
+    def TWO_PAIR(self):
 
-    # def STRAIGHT(self):
+    def THREE_OF_A_KIND(self):
 
-    # def FLUSH(self):
+    def STRAIGHT(self):
 
-    # def FULL_HOUSE(self):
+    def FLUSH(self):
 
-    # def FOUR_OF_A_KIND(self):
+    def FULL_HOUSE(self):
 
-    # def STRAIGHT_FLUSH(self):
+    def FOUR_OF_A_KIND(self):
+
+    def STRAIGHT_FLUSH(self):
