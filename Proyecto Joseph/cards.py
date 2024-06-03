@@ -33,16 +33,19 @@ class Hand:
     FULL_HOUSE = 6
     FOUR_OF_A_KIND = 7
     STRAIGHT_FLUSH = 8
-    def high_card(Player:Player,Dealer:Dealer):
-    
-    def one_pair(Player:Player,Dealer:Dealer):
-    
+    def __init__(self) -> None:
+        pass
+
+    def high_card(comon_cards:list[Card],private_cards:list[Card]):
+        pass
+    def one_pair(comon_cards:list[Card],private_cards:list[Card]):
+        pass
     def two_pair(comon_cards:list[Card],private_cards:list[Card]):
-
+        pass
     def three_of_a_kind(comon_cards:list[Card],private_cards:list[Card]):
-
+        pass
     def straight(comon_cards:list[Card],private_cards:list[Card]):
-    
+        pass
     def flush(comon_cards:list[Card],private_cards:list[Card]):
         all_cards = common_cards + private_cards
         suits = {'❤': [], '♠': [], '◆': [], '♣': []}
@@ -60,13 +63,3 @@ class Hand:
     def straight_flush(comon_cards:list[Card],private_cards:list[Card]):
 
      #all the cards same colour and num
-
-
-    def __init__(
-        self,
-    ) -> None:
-        pass
-    def high_card():
-        return None
-    def calc_best_hands(self):
-        return combinations()
