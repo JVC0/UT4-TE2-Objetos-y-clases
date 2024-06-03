@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from helpers import combinations
+from roles import Player,Dealer
 
 
 class Card:
@@ -26,12 +27,32 @@ class Hand:
     HIGH_CARD = 0
     ONE_PAIR = 1
     TWO_PAIR = 2
-    THREE_OF_A_3IND = 4
+    THREE_OF_A_KIND = 4
     STRAIGHT = 4
     FLUSH = 5
     FULL_HOUSE = 6
     FOUR_OF_A_KIND = 7
     STRAIGHT_FLUSH = 8
+    def high_card(Player:Player,Dealer:Dealer):
+    
+    def one_pair(Player:Player,Dealer:Dealer):
+    
+    def two_pair(comon_cards:list[Card],private_cards:list[Card]):
+
+    def three_of_a_kind(comon_cards:list[Card],private_cards:list[Card]):
+
+    def straight(comon_cards:list[Card],private_cards:list[Card]):
+    
+    def flush(comon_cards:list[Card],private_cards:list[Card]):
+    
+    def four_of_a_kind(comon_cards:list[Card],private_cards:list[Card]):
+        
+    def full_house(comon_cards:list[Card],private_cards:list[Card]):
+
+    def straight_flush(comon_cards:list[Card],private_cards:list[Card]):
+
+     #all the cards same colour and num
+
 
     def __init__(
         self,
