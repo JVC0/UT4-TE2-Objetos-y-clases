@@ -44,6 +44,14 @@ class Hand:
     def straight(comon_cards:list[Card],private_cards:list[Card]):
     
     def flush(comon_cards:list[Card],private_cards:list[Card]):
+        all_cards = common_cards + private_cards
+        suits = {'❤': [], '♠': [], '◆': [], '♣': []}
+        for card in all_cards:
+            suits[card.suit].append(card)
+        for suit_cards in suits.values():
+            if len(suit_cards) >= 5:
+                return True
+        return Hand.straight(common_cards,private_cards)
     
     def four_of_a_kind(comon_cards:list[Card],private_cards:list[Card]):
         
