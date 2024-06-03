@@ -30,9 +30,7 @@ class Hand:
     FOUR_OF_A_KIND = 7
     STRAIGHT_FLUSH = 8
 
-    def __init__(
-        self,
-    ) -> None:
+    def __init__(self,) -> None:
         pass
 
     def calc_best_hands(self):

@@ -1,5 +1,5 @@
 from cards import Card, Hand
-from roles import Player
+from roles import Player,Dealer
 
 class Deck:
     def __init__():
@@ -8,5 +8,5 @@ class Deck:
 def get_winner(
     players: list[Player],
     common_cards: list[Card],
-    private_cards: list[list[Card]],
-) -> tuple[Player | None, Hand]:
+    private_cards: list[list[Card]],) -> tuple[Player | None, Hand]:
+
