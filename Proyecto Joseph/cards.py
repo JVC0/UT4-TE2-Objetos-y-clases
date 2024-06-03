@@ -7,16 +7,19 @@ class Card:
     RANK_ORDER = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"]
 
     def __init__(self, card_values: str) -> None:
-        self.rank, self.suit = list(card_values)
+        self.rank, self.suit = card_values[:-1], card_values[-1]
 
     def __eq__(self, other: Card) -> bool:
-        return Card.RANK_ORDER.index(self.rank) == other.RANK_ORDER.index(other.rank)
+        return Card.RANK_ORDER.index(self.rank) == Card.RANK_ORDER.index(other.rank)
 
     def __lt__(self, other: Card) -> bool:
-        return Card.RANK_ORDER.index(self.rank) < other.RANK_ORDER.index(other.rank)
+        return Card.RANK_ORDER.index(self.rank) < Card.RANK_ORDER.index(other.rank)
 
     def __gt__(self, other: Card) -> bool:
-        return Card.RANK_ORDER.index(self.rank) > other.RANK_ORDER.index(other.rank)
+        return Card.RANK_ORDER.index(self.rank) > Card.RANK_ORDER.index(other.rank)
+
+    def __str__(self) -> str:
+        return f"{self.rank}{self.suit}"
 
 
 class Hand:
@@ -34,6 +37,7 @@ class Hand:
         self,
     ) -> None:
         pass
-
+    def high_card():
+        return None
     def calc_best_hands(self):
         return combinations()
