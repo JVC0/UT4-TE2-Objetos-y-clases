@@ -35,12 +35,12 @@ class Hand:
 
     def __init__(self, player: Player) -> None:
         self.all_cards = Dealer.common_cards + player.private_cards
-        self.best_hand = combination
         self.cat, self.cat_rank = get_best_hand()
         self.cat = None
         self.cat_rank = None
+
     def rank_freq(self) -> dict[str, int]: 
-        result = {}
+        freq = {}
         for card in self.cards:
             if card.rank in result:
                 result[card.rank] = result.get(card.rank) + 1
