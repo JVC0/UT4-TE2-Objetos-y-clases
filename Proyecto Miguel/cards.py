@@ -39,6 +39,14 @@ class Hand:
         self.cat, self.cat_rank = get_best_hand()
         self.cat = None
         self.cat_rank = None
+    def rank_freq(self) -> dict[str, int]: 
+        result = {}
+        for card in self.cards:
+            if card.rank in result:
+                result[card.rank] = result.get(card.rank) + 1
+            else:
+                result[card.rank] = 1
+        return result
 
     @property
     def highest_card(self):
@@ -169,3 +177,4 @@ hoola = {
     '6': 3
     '1': 2
 }
+
