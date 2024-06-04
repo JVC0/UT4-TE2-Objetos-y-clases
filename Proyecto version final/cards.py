@@ -35,7 +35,7 @@ class Hand:
     def __init__(self) -> None:
         pass
 
-    def high_card(comon_cards:list[Card],private_cards:list[Card]):
+    def high_card(common_cards:list[Card],private_cards:list[Card]):
         pass
     def one_pair(self, private_cards:list[Card], common_cards:list[Card]):
         all_card = list(combinations((private_cards, common_cards), n=2))
@@ -50,11 +50,11 @@ class Hand:
             if pair[1] == pair[0]:
                 return True
         return Hand.high_card(private_cards, common_cards)
-    def three_of_a_kind(comon_cards:list[Card],private_cards:list[Card]):
+    def three_of_a_kind(common_cards:list[Card],private_cards:list[Card]):
         pass
-    def straight(comon_cards:list[Card],private_cards:list[Card]):
+    def straight(common_cards:list[Card],private_cards:list[Card]):
         pass
-    def flush(comon_cards:list[Card],private_cards:list[Card]):
+    def flush(common_cards:list[Card],private_cards:list[Card]):
         all_cards = common_cards + private_cards
         suits = {'❤': [], '♠': [], '◆': [], '♣': []}
         for card in all_cards:
@@ -64,8 +64,8 @@ class Hand:
                 return True
         return Hand.straight(common_cards,private_cards)
     
-    def four_of_a_kind(comon_cards:list[Card],private_cards:list[Card]):
+    def four_of_a_kind(common_cards:list[Card],private_cards:list[Card]):
         
-    def full_house(comon_cards:list[Card],private_cards:list[Card]):
+    def full_house(common_cards:list[Card],private_cards:list[Card]):
 
-    def straight_flush(comon_cards:list[Card],private_cards:list[Card]):
+    def straight_flush(common_cards:list[Card],private_cards:list[Card]):
