@@ -30,3 +30,12 @@ class Player:
             ]
         else:
             self.private_cards = private_cards
+
+    def get_best_hand(self):
+        all_cards = privadas + comunes
+        combinaciones = combinations(all_cards, n=5)
+        best_hand = Hand(next(combinaciones))
+        for hand in combinaciones:
+            hand = Hand(hand)
+            if hand > best_hand:
+                best_hand = hand

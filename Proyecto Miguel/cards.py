@@ -35,35 +35,41 @@ class Hand:
 
     def __init__(self, player: Player) -> None:
         self.all_cards = Dealer.common_cards + player.private_cards
-        self.hand_type = None
+        self.best_hand = combination
+        self.cat, self.cat_rank = get_best_hand()
+        self.cat = None
+        self.cat_rank = None
+
+    @property
+    def highest_card(self):
+        return max(self.all_cards)
 
     def high_card(self):
-        self.hand_type = Hand.HIGH_CARD
-        return self.hand_type
+        self.cat = Hand.HIGH_CARD
+        return self.cat, self.highest_card
 
     def one_pair(self):
         for card in self.all_cards:
             if self.all_cards.count(card.rank) == 2:
-                self.hand_type = Hand.ONE_PAIR
-                return self.hand_type
-        return Hand.high_card()
+                self.cat = Hand.ONE_PAIR
+                return self.cat, self.hig
+        return None
 
     def two_pair(self):
         num_of_pairs = 0
         for card in self.all_cards:
             if Hand.one_pair():
                 num_of_pairs += 1
-                
             if num_of_pairs == 2:
-                self.hand_type = Hand.TWO_PAIR
-                return self.hand_type
-        return 
+                self.cat = Hand.TWO_PAIR
+                return self.cat
+        return
 
     def three_of_a_kind(self):
         for card in self.all_cards:
             if self.all_cards.count(card.rank) == 3:
-                self.hand_type = Hand.THREE_OF_A_KIND
-                return self.hand_type
+                self.cat = Hand.THREE_OF_A_KIND
+                return self.cat, 
         return Hand.two_pair()
 
     def straight(self):
@@ -72,15 +78,15 @@ class Hand:
             if first_card + 1 == card.rank:
                 return Hand.three_of_a_kind()
             first_card += 1
-        self.hand_type = Hand.STRAIGHT
-        return self.hand_type
+        self.cat = Hand.STRAIGHT
+        return self.cat
 
     def four_of_a_kind(self):
         ranks = [card.rank for card in self.all_cards]
         for rank in ranks:
             if ranks.count(rank) == 4:
-                self.hand_type = Hand.FOUR_OF_A_KIND
-                return self.hand_type
+                self.cat = Hand.FOUR_OF_A_KIND
+                return self.cat
         return Hand.full_house()
 
     def full_house(self):
@@ -93,8 +99,8 @@ class Hand:
             elif ranks.count(rank) == 2:
                 has_pair = True
         if all(has_pair, has_three):
-            self.hand_type = Hand.FULL_HOUSE
-            return self.hand_type
+            self.cat = Hand.FULL_HOUSE
+            return self.cat
         return Hand.flush()
 
     def flush(self):
@@ -103,12 +109,63 @@ class Hand:
             suits[card.suit].append(card)
         for suit_cards in suits.values():
             if len(suit_cards) >= 5:
-                self.hand_type = Hand.FLUSH
-                return self.hand_type
-        return Hand.straight(self.all_cards)
+
+                self.cat = Hand.FLUSH
+                self.cat_rank = max(suit_cards)
+                return self.cat, self.highest_card
+        return None
+        # return Hand.straight(self.all_cards)
 
     def straight_flush(self):
         if self.flush() and self.straight():
-            self.hand_type = Hand.STRAIGHT_FLUSH
-            return self.hand_type
-        return Hand.four_of_a_kind()
+            self.cat = Hand.STRAIGHT_FLUSH
+            return self.cat, self.highest_card
+        return None
+
+    def find_category(self) -> tuple[int, str|tuple[str, str]]:
+        if match := self.straight_flush():
+            return match
+        if match := self.four_of_a_kind():
+            return match
+        if match := self.full_house():
+            return match
+        if match := self.flush():
+            return match
+        if match := self.straight():
+            return match
+        if match := self.three_of_a_kind():
+            return match
+        if match := self.two_pair():
+            return match
+        if match := self.one_pair():
+            return match
+        return self.high_card()
+
+
+
+
+
+
+
+
+5, 5, 9, 10, J
+
+def one_pair():
+if 2 in hoola.values():
+    for rank, ratio in hoola.items():
+        if ratio == 2
+            return Hand.ONE_PAIR, rank
+return None
+hoola = {
+    '5': 2,
+    '9': 1,
+    '10': 1,
+    'J': 1
+}
+
+6,6,6,1,1  (6, 1)
+
+{
+    '6': 3
+    '1': 2
+}
