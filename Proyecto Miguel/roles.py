@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from cards import Card
 from game import Game
 
@@ -20,12 +21,12 @@ class Dealer:
 
 
 class Player:
-    def __init__(self, name: str, dealer: Dealer, private_cards: list[Card] | None = None):
+    def __init__(self, name: str, private_cards: list[Card] | None = None):
         self.name = name
         if private_cards is None:
             self.private_cards = [
-                Card(next(dealer.deck_generator)),
-                Card(next(dealer.deck_generator))
+                Card(next(Dealer.deck_generator)),
+                Card(next(Dealer.deck_generator)),
             ]
         else:
             self.private_cards = private_cards

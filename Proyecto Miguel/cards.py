@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from helpers import combinations
 from roles import Dealer, Player
 
 
@@ -34,55 +33,55 @@ class Hand:
     FOUR_OF_A_KIND = 7
     STRAIGHT_FLUSH = 8
 
-    def __init__(self) -> None:
-        self.all_cards = Dealer.common_cards + Player.private_cards
+    def __init__(self, player: Player) -> None:
+        self.all_cards = Dealer.common_cards + player.private_cards
+        self.hand_type = None
 
     def high_card(self):
-        pass
+        self.hand_type = Hand.HIGH_CARD
+        return self.hand_type
 
     def one_pair(self):
         for card in self.all_cards:
             if self.all_cards.count(card.rank) == 2:
-                return True
-        return Hand.high_card(self.all_cards)
+                self.hand_type = Hand.ONE_PAIR
+                return self.hand_type
+        return Hand.high_card()
 
     def two_pair(self):
         num_of_pairs = 0
         for card in self.all_cards:
-            if self.one_pair(self.all_cards):
+            if Hand.one_pair():
                 num_of_pairs += 1
+                
             if num_of_pairs == 2:
-                return True
+                self.hand_type = Hand.TWO_PAIR
+                return self.hand_type
+        return 
 
     def three_of_a_kind(self):
         for card in self.all_cards:
             if self.all_cards.count(card.rank) == 3:
-                return True
-        return Hand.two_pair(self.all_cards)
+                self.hand_type = Hand.THREE_OF_A_KIND
+                return self.hand_type
+        return Hand.two_pair()
 
     def straight(self):
         first_card = sorted(self.all_cards)[0].rank
         for card in self.all_cards[1:]:
-            if first_card + 1 != card.rank:
-                return Hand.three_of_a_kind(self.all_cards)
+            if first_card + 1 == card.rank:
+                return Hand.three_of_a_kind()
             first_card += 1
-        return True
-
-    def flush(self):
-        suits = {'❤': [], '♠': [], '◆': [], '♣': []}
-        for card in self.all_cards:
-            suits[card.suit].append(card)
-        for suit_cards in suits.values():
-            if len(suit_cards) >= 5:
-                return True
-        return Hand.straight(self.all_cards)
+        self.hand_type = Hand.STRAIGHT
+        return self.hand_type
 
     def four_of_a_kind(self):
         ranks = [card.rank for card in self.all_cards]
         for rank in ranks:
             if ranks.count(rank) == 4:
-                return True
-        return Hand.flush(self.all_cards)
+                self.hand_type = Hand.FOUR_OF_A_KIND
+                return self.hand_type
+        return Hand.full_house()
 
     def full_house(self):
         ranks = [card.rank for card in self.all_cards]
@@ -94,19 +93,22 @@ class Hand:
             elif ranks.count(rank) == 2:
                 has_pair = True
         if all(has_pair, has_three):
-            return True
-        return Hand.four_of_a_kind(self.all_cards)
+            self.hand_type = Hand.FULL_HOUSE
+            return self.hand_type
+        return Hand.flush()
 
-    def straight_flush(self):
-        if not self.flush():
-            return False
+    def flush(self):
         suits = {'❤': [], '♠': [], '◆': [], '♣': []}
         for card in self.all_cards:
             suits[card.suit].append(card)
         for suit_cards in suits.values():
             if len(suit_cards) >= 5:
-                rank_indices = sorted([Card.RANK_ORDER.index(card.rank) for card in suit_cards])
-                for i in range(len(rank_indices) - 4):
-                    if rank_indices[i : i + 5] == list(range(rank_indices[i], rank_indices[i] + 5)):
-                        return True
-        return False
+                self.hand_type = Hand.FLUSH
+                return self.hand_type
+        return Hand.straight(self.all_cards)
+
+    def straight_flush(self):
+        if self.flush() and self.straight():
+            self.hand_type = Hand.STRAIGHT_FLUSH
+            return self.hand_type
+        return Hand.four_of_a_kind()
