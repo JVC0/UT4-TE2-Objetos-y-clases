@@ -65,7 +65,8 @@ class Hand:
         return Hand.straight(common_cards,private_cards)
     
     def four_of_a_kind(common_cards:list[Card],private_cards:list[Card]):
-        
+        pass
     def full_house(common_cards:list[Card],private_cards:list[Card]):
-
+        pass
     def straight_flush(common_cards:list[Card],private_cards:list[Card]):
+        pass
