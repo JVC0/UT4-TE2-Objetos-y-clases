@@ -126,13 +126,16 @@ class Hand:
         return None
     
     def get_best_hand(self,all_cards:list[Card]):
-        all_combinations= list(combinations(all_cards,5))
-        best_hand=None
-        current_hand=None
+        all_combinations = combinations(all_cards,5)
+        best_hand = Hand(next(all_combinations))
+        current_hand = None
         for hand in all_combinations:
-            current_hand = Hand.find_category(hand)
+            current_hand = Hand(hand)
             if current_hand > best_hand:
                 best_hand = hand
+            elif current_hand == best_hand:
+                if current_hand.highest_card > best_hand.highest_card:
+                    best_hand = hand
         return best_hand
     
     def sort_cards(cards):
