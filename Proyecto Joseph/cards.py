@@ -66,15 +66,14 @@ class Hand:
         return None
 
     def two_pair(self):
-        num_of_pairs = 0
-        highest_cards = []
+        pairs = []
         for rank in set(self.ranks):
             if self.ranks.count(rank) == 2:
-                num_of_pairs += 1
-                highest_cards.append(rank)
-        if num_of_pairs == 2:
+                pairs.append(rank)
+        if len(pairs) == 2:
+            pairs.sort(key=lambda r: Card.RANK_ORDER.index(r))
             self.cat = Hand.TWO_PAIR
-            return self.cat, tuple(highest_cards)
+            return self.cat, tuple(pairs)
         return None
 
     def three_of_a_kind(self):
@@ -113,7 +112,7 @@ class Hand:
                 highest_cards.append(rank)
         if has_pair and has_three:
             self.cat = Hand.FULL_HOUSE
-            return self.cat, tuple(highest_cards)
+            return self.cat, tuple(sorted(highest_cards))
         return None
 
     def flush(self):
