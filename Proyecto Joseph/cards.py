@@ -99,20 +99,19 @@ class Hand:
         return None
 
     def full_house(self):
-        ranks = [card.rank for card in self.hand]
-        has_three = False
-        has_pair = False
-        highest_cards = []
-        for rank in set(ranks):
-            if ranks.count(rank) == 3:
-                has_three = True
-                highest_cards.append(rank)
-            elif ranks.count(rank) == 2:
-                has_pair = True
-                highest_cards.append(rank)
-        if has_pair and has_three:
+        has_three = None
+        has_pair = None
+        for rank in set(self.ranks):
+            if self.ranks.count(rank) == 3:
+                if not has_three or Card.RANK_ORDER.index(rank) < Card.RANK_ORDER.index(has_three):
+                    has_three = rank
+            elif self.ranks.count(rank) == 2:
+                if not has_pair or Card.RANK_ORDER.index(rank) < Card.RANK_ORDER.index(has_pair):
+                    has_pair = rank
+
+        if has_three and has_pair:
             self.cat = Hand.FULL_HOUSE
-            return self.cat, tuple(sorted(highest_cards))
+            return self.cat, (has_three, has_pair)
         return None
 
     def flush(self):
@@ -167,10 +166,26 @@ class Hand:
         return self.cat == other.cat
 
     def __gt__(self, other: Hand) -> bool:
-        if self.cat != other.cat:
-            return self.cat > other.cat
-        else:
-            return self.highest_card() > other.highest_card()
+        if self.cat > other.cat:
+            return True
+        if self.cat < other.cat:
+            return False
+        if isinstance(self.cat_rank,str):
+            if Card.RANK_ORDER.index(self.cat_rank)>Card.RANK_ORDER.index(other.cat_rank):
+                return True
+            if Card.RANK_ORDER.index(self.cat_rank)<Card.RANK_ORDER.index(other.cat_rank):
+                return False
+        if isinstance(self.cat_rank,tuple):
+            for card_a ,card_b in zip(self.cat_rank,other.cat_rank):
+                if card_a > card_b:
+                    return True
+                if card_a < card_b:
+                    return False
+        for card_a, card_b in zip(self.hand,other.hand):
+            if card_a > card_b:
+                return True
+            if card_a < card_b:
+                return False
 
 class HandIterator:
     def __init__(self, hand: Hand) -> None:

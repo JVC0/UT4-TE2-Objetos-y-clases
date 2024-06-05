@@ -17,7 +17,7 @@ def get_winner(
     hand_player2 = player2.get_best_hand()
     if hand_player1 > hand_player2:
         winner = (player1, hand_player1)
-    elif hand_player1 < hand_player2:
+    elif hand_player2 > hand_player1:
         winner = (player2, hand_player2)
     else:
         winner = (None, hand_player1)
