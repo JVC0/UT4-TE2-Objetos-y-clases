@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from cards import Card, Hand
 from helpers import shuffle
-from roles import Dealer, Player
+from roles import Player,Dealer
 
 
 class Game:
     def __init__(self) -> None:
         self.deck = [
             num + suit
-            for suit in ['❤', '♠', '◆', '♣']  
+            for suit in ['❤', '♠', '◆', '♣']
             for num in ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
         ]
         shuffle(self.deck)
@@ -28,9 +28,13 @@ class Game:
         card = Card(self.deck[self.pointer])
         self.pointer += 1
         return card
+
     def get_winner(
-    players: list[Player],
-    common_cards: list[Card],
-    private_cards: list[list[Card]],
+        self,
+        players: list[Player],
+        common_cards: list[Card],
+        private_cards: list[list[Card]],
     ) -> tuple[Player | None, Hand]:
-        return players
+        
+
+    
